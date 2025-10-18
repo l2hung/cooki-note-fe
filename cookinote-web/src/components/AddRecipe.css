@@ -1,0 +1,124 @@
+.add-recipe-wrapper {
+    background-color: #f4f5f7;
+    color: #333;
+    font-family: sans-serif;
+    min-height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.add-recipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.close-btn, .publish-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.close-btn { color: #555; font-size: 1.5rem; }
+.header-actions { display: flex; gap: 1rem; }
+.publish-btn { background-color: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 20px; }
+.publish-btn:disabled { background-color: #aaa; cursor: not-allowed; }
+
+.image-upload-section { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem; cursor: pointer; }
+.image-placeholder { width: 100px; height: 100px; border-radius: 50%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; color: #aaa; }
+.upload-text-btn { background-color: transparent; border: 1px solid #ccc; color: #555; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; }
+
+.image-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.form-section { margin-bottom: 2.5rem; }
+.title-input, .description-input, .meta-item input, .meta-item select { /* Added select */ width: 100%; background-color: #fff; border: 1px solid #ccc; border-radius: 12px; padding: 1rem; color: #333; font-size: 1rem; margin-bottom: 1rem; box-sizing: border-box; }
+.description-input { min-height: 100px; resize: vertical; }
+
+.meta-grid { display: grid; /* Changed to grid */ grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive columns */ gap: 1rem; }
+.meta-item { flex: 1; }
+.meta-item label { display: block; margin-bottom: 0.5rem; color: #777; }
+.meta-item input, .meta-item select { margin-bottom: 0; } /* Added select */
+
+h2 { font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+
+.dynamic-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    position: relative;
+}
+
+.dynamic-field .drag-handle { color: #aaa; cursor: grab; }
+.dynamic-field input, .dynamic-field textarea { flex-grow: 1; background: none; border: none; color: #333; font-size: 1rem; outline: none; }
+/* Added specific styles for ingredient inputs */
+.ingredient-quantity { flex-basis: 50px; flex-grow: 0; text-align: right;}
+.ingredient-unit { flex-basis: 80px; flex-grow: 0; }
+.ingredient-name { flex-grow: 1; }
+
+
+.add-btn { background: none; border: none; color: #007bff; font-size: 1rem; font-weight: 500; cursor: pointer; }
+.remove-btn { background: #e9ecef; border: none; color: #555; cursor: pointer; border-radius: 50%; width: 28px; height: 28px; font-size: 20px; line-height: 28px; text-align: center; padding: 0; flex-shrink: 0; /* Prevent button shrinking */ }
+.remove-btn:hover { background: #d8dde2; }
+.step-remove-btn { position: absolute; top: 10px; right: 10px; z-index: 1; /* Ensure it's above other elements */}
+
+
+.step-field { flex-direction: column; align-items: stretch; padding: 1rem; }
+.step-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+.step-number { background-color: #e0e0e0; color: #555; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-weight: bold; flex-shrink: 0; }
+
+/* === SỬA ĐỔI LAYOUT BƯỚC LÀM TẠI ĐÂY === */
+.step-content {
+    display: flex; /* Arrange textarea and image side-by-side */
+    gap: 1rem;
+    align-items: flex-start; /* Align items to the top */
+}
+
+.step-content textarea {
+    flex-grow: 1; /* Textarea takes available space */
+    min-height: 80px;
+    resize: vertical;
+    padding: 0;
+    border: none; /* Remove border if it's inside the field */
+    background: none;
+}
+
+.step-image-upload {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    width: 80px; /* Chiều rộng cố định */
+    height: 80px; /* Chiều cao cố định */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 1px dashed #ccc;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+/* ======================================= */
+
+.step-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.error-message { color: #d9534f; text-align: center; margin-top: 1rem; }

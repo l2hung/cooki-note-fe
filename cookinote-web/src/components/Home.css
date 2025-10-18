@@ -1,0 +1,211 @@
+/* ===============================
+   GENERAL SETUP
+=============================== */
+.home-wrapper {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f5f7;
+    min-height: 100vh;
+    padding: 2rem;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+/* ===============================
+   HEADER
+=============================== */
+.home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.search-bar:hover {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.search-bar-link {
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1; 
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.notification-icon:hover {
+    transform: scale(1.1);
+}
+
+/* ===============================
+   SECTION TITLES
+=============================== */
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.section-title a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+.section-title a:hover {
+    text-decoration: underline;
+}
+
+/* ===============================
+   CATEGORY SECTION
+=============================== */
+.category-section {
+    margin-bottom: 2.5rem;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.category-card-link {
+    text-decoration: none;
+    color: inherit;      
+}
+
+.category-card {
+    background-color: #fafafa;
+    border-radius: 12px;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    background-color: #f0f8ff;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.category-card span {
+    font-weight: 500;
+    color: #333;
+}
+
+/* ===============================
+   NEW RECIPES GRID
+=============================== */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.recipe-card-home {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-card-home:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.recipe-card-home img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.recipe-card-home h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0.75rem 0.25rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recipe-card-home p {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0 0.75rem 0.75rem;
+}
+
+
+/* ===============================
+   RESPONSIVE DESIGN
+=============================== */
+@media (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .recipes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}

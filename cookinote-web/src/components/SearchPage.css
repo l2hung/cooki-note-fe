@@ -1,0 +1,130 @@
+/* General setup for light theme */
+.search-page-wrapper {
+    font-family: sans-serif;
+    background-color: #f4f5f7; /* Nền sáng tổng thể */
+    color: #333; /* Chữ màu tối */
+    min-height: 100vh;
+    box-sizing: border-box;
+    
+    /* Giới hạn chiều rộng và căn giữa */
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px; /* Khoảng trống cho footer */
+}
+
+/* Header */
+.search-page-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    /* border-bottom: 1px solid #e0e0e0; */
+    width: 100%;
+    max-width: none;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: #555; /* Icon màu tối */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #f4f5f7; /* Nền thanh tìm kiếm xám nhạt */
+    /* border: 1px solid #e0e0e0; */
+    border-radius: 50px;
+    padding: 0.75rem 1rem;
+}
+
+.search-bar .icon-button, .search-bar span {
+    color: #888;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: #333; /* Chữ màu tối */
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
+}
+
+/* User Search Button */
+.search-toggle-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    
+}
+
+.user-search-button { 
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Main content and results */
+.search-results-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem 1.5rem;
+}
+
+.search-results-container p {
+    text-align: center;
+    color: #888;
+    margin-top: 2rem;
+}
+
+
+.result-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.result-card img {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.result-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+}
+
+.result-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+    text-align: left;
+}
+

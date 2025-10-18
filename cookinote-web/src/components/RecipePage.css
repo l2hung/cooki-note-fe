@@ -1,0 +1,283 @@
+.recipe-page-container {
+    font-family: "Inter", sans-serif;
+    background-color: #f4f5f7;
+    min-height: 100vh;
+    padding:2rem;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Header */
+.recipe-page-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    transition: color 0.2s;
+}
+.back-button:hover {
+    color: #007bff;
+}
+
+/* Ảnh chính */
+.recipe-main-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Tiêu đề và nút tim */
+.recipe-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.recipe-title-section h1 {
+    font-size: 1.75rem;
+    color: #222;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Nút like */
+.like-button {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #555;
+    transition: all 0.2s ease-in-out;
+}
+.like-button:hover {
+    background-color: #f6f6f6;
+}
+.like-button.liked {
+    background-color: #ffe5e8;
+    color: #ff4d6d;
+    border-color: #ffcbd3;
+}
+
+/* Thông tin tác giả */
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.author-name {
+    font-weight: 600;
+    color: #333;
+}
+.recipe-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Thông tin meta */
+.recipe-meta {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 16px;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+}
+.recipe-meta div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #555;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Tiêu đề phần */
+.recipe-details-section {
+    margin-bottom: 1.75rem;
+}
+.recipe-details-section h2 {
+    font-size: 1.3rem;
+    color: #222;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+/* Danh sách nguyên liệu */
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.ingredients-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+}
+.ingredients-list li:last-child {
+    border-bottom: none;
+}
+
+/* Các bước nấu */
+.steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: step-counter;
+}
+.steps-list li {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.steps-list li::before {
+    content: counter(step-counter);
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.steps-list p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Bình luận */
+.comments-section {
+    margin-bottom: 2rem;
+}
+.comment-item {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comment-content {
+    background-color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    flex-grow: 1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.comment-content p {
+    margin: 0.3rem 0 0;
+}
+
+/* Form bình luận */
+.comment-form {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+.comment-form-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comment-form-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.comment-form-name {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    max-width: 60px;
+    word-wrap: break-word;
+}
+
+
+.comment-form textarea {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 40px;
+}
+.comment-form button {
+    background: #007bff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.comment-form button:hover {
+    background: #0056b3;
+}
+
+
+/* Loading */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 3rem auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.error-message {
+    text-align: center;
+    color: #ff4757;
+    margin-top: 1rem;
+}
