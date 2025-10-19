@@ -1,0 +1,273 @@
+/* src/components/ProfilePage.css */
+
+.profile-page-wrapper {
+    /* Uses background from MainLayout, or set one if needed */
+    /* background-color: #f4f5f7; */
+    min-height: calc(100vh - 70px); /* Adjust based on actual footer height */
+    padding-bottom: 20px; /* Space above the footer */
+}
+
+/* Header (Can be removed if SubPageLayout is used) */
+.profile-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff; /* White header background */
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.profile-page-header .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    color: #333;
+}
+
+.profile-page-header .header-placeholder {
+    width: 24px; /* Maintain spacing */
+}
+
+/* User Summary */
+.user-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background-color: #fff; /* White background for this section */
+}
+
+/* Avatar Styles */
+.profile-avatar-large, .profile-avatar-letter-large, .profile-avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0; /* Default grey background */
+    color: #888;
+    font-size: 2.5rem; /* For letter avatar */
+    font-weight: bold; /* For letter avatar */
+}
+/* Style for the placeholder icon specifically */
+.profile-avatar-placeholder svg {
+    width: 50%;
+    height: 50%;
+    color: #888;
+}
+
+.profile-name {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-username {
+    color: #777;
+    margin-bottom: 0.75rem;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 0.75rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.profile-stats span {
+    display: inline-block;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Action Buttons (Outlined Style) */
+.action-button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    border: 1px solid #ccc; /* Grey border */
+    background-color: transparent; /* Transparent background */
+    color: #333; /* Dark text */
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.9rem;
+}
+.action-button:hover {
+    background-color: #f0f0f0; /* Light grey on hover */
+}
+.follow-button { /* Specific style for follow */
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.follow-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Completion Section */
+.completion-section {
+    padding: 1.5rem;
+    background-color: #f8f9fa; /* Light grey background */
+    /* Removed top/bottom borders for a cleaner look */
+    margin-bottom: 1.5rem;
+}
+
+.completion-section h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600; /* Bolder title */
+    text-align: left; /* Align title left */
+}
+
+.completion-section > p { /* Target direct paragraph child */
+    margin: 0 0 1.5rem 0;
+    font-size: 0.9rem;
+    color: #777;
+    text-align: left; /* Align subtitle left */
+}
+
+.completion-cards {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+.completion-cards::-webkit-scrollbar { display: none; }
+
+.completion-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    min-width: 180px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.completion-card span:first-child, /* Icon */
+.completion-card svg {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #555; /* Neutral icon color */
+}
+
+.completion-card h4 {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    font-weight: 600; /* Bolder card title */
+}
+
+.completion-card p {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+/* Card Action Button (Outlined Style) */
+.card-action-button {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #007bff; /* Blue border */
+    background-color: transparent; /* Transparent background */
+    color: #007bff; /* Blue text */
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: auto;
+    width: 80%;
+    transition: background-color 0.2s, color 0.2s;
+}
+.card-action-button:hover {
+    background-color: #e7f3ff; /* Light blue on hover */
+}
+
+
+/* Profile Tabs */
+.profile-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+
+.profile-tabs.single-tab {
+    justify-content: center; /* Center the single tab */
+}
+
+.tab-button {
+    /* flex-grow: 1; Remove grow for single tab */
+    /* max-width: 50%; Remove max-width */
+    padding: 1rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tab-button svg, .tab-button span:first-child {
+   font-size: 1.2rem;
+}
+
+.tab-button.active {
+    color: #007bff; /* Blue for active tab */
+    border-bottom-color: #007bff;
+}
+
+/* Tab Content */
+.tab-content {
+    padding: 1.5rem;
+    background-color: #f4f5f7; /* Light grey background */
+}
+
+.empty-tab-message {
+    text-align: center;
+    color: #aaa;
+    margin-top: 2rem;
+}
+
+/* Recipe Grid (Reusing styles) */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+.recipe-card-link { text-decoration: none; color: inherit; }
+.recipe-card { background-color: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s ease; }
+.recipe-card:hover { transform: translateY(-5px); }
+.recipe-card img { width: 100%; height: 120px; object-fit: cover; }
+.recipe-card h3 { font-size: 1rem; margin: 0.5rem 0.75rem; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Loading and Error */
+.loading-container { text-align: center; padding: 2rem; color: #888;}
+.error-message { color: #d9534f; text-align: center; margin: 2rem 1rem; }

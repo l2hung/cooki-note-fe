@@ -1,0 +1,135 @@
+.liked-recipes-wrapper {
+    /* Giới hạn chiều rộng và căn giữa */
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    background-color: #f4f5f7;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px; 
+   
+}
+
+/* Header mới */
+.liked-recipes-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    
+    
+}
+
+.liked-recipes-header .back-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    padding: 0;
+}
+
+.liked-recipes-header .search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #f4f5f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+}
+
+.liked-recipes-header .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+.liked-recipes-header .search-bar input::placeholder {
+    color: #aaa;
+}
+
+.liked-recipes-header .header-placeholder {
+    width: 24px; 
+}
+
+
+.liked-recipes-container {
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
+}
+
+.liked-recipes-container .loading-message,
+.liked-recipes-container .error-message,
+.liked-recipes-container .no-results-message {
+    text-align: center;
+    color: #888;
+    margin-top: 3rem;
+}
+
+.empty-state {
+    text-align: center;
+    margin-top: 4rem;
+    color: #aaa;
+}
+
+.empty-state .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    margin: 0.5rem 0;
+}
+
+/* Tái sử dụng style grid */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.recipe-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.recipe-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.recipe-card h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0.75rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recipe-card p {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0 0.75rem 0.75rem;
+}

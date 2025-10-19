@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ProfileMenu from './ProfileMenu'; // <-- IMPORT MENU MỚI
 import './Home.css'; 
 
 
-const SearchIcon = () => <>&#128269;</>; // 🔎
-const BellIcon = () => <>&#128276;</>; // 🔔
-const BookIcon = () => <>&#128214;</>; // 📖
+const SearchIcon = () => <>&#128269;</>;
+const BellIcon = () => <>&#128276;</>;
+const BookIcon = () => <>&#128214;</>;
 
 
 const Home = () => {
@@ -15,13 +16,11 @@ const Home = () => {
     const [recentRecipes, setRecentRecipes] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); // State để quản lý menu
 
     useEffect(() => {
         const token = localStorage.getItem('jwt_token');
-        if (!token) {
-           
-            return;
-        }
+        if (!token) { return; }
 
         const apiClient = axios.create({
             baseURL: '/api/v1',
@@ -53,11 +52,15 @@ const Home = () => {
 
     return (
         <div className="home-wrapper">
+            {/* Render menu nếu isProfileMenuOpen là true */}
+            {isProfileMenuOpen && <ProfileMenu user={currentUser} onClose={() => setIsProfileMenuOpen(false)} />}
+
             <header className="home-header">
                 <img
                     src={currentUser?.medias?.[0]?.media?.url || 'https://via.placeholder.com/40'}
                     alt="User Avatar"
                     className="user-avatar"
+                    onClick={() => setIsProfileMenuOpen(true)} // Mở menu khi click
                 />
                 <Link to="/search" className="search-bar-link">
                     <div className="search-bar">
@@ -113,7 +116,6 @@ const Home = () => {
                 </section>
                 {error && <p className="error-message">{error}</p>}
             </main>
-
         </div>
     );
 };

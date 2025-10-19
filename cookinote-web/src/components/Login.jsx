@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import './Login.css';
 
-// Biến này không cần thiết khi dùng proxy
-// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -28,14 +26,17 @@ export default function Login() {
       });
       const json = await response.json();
 
-     
+      // Giả sử backend trả về token trong `json.data.accessToken` hoặc `json.data.token`
+      // Bạn hãy kiểm tra lại cấu trúc response từ API login cho chính xác
       const token = json.data?.token || json.data?.accessToken;
 
       if (response.ok && token) {
-        
+        // === SỬA LỖI TẠI ĐÂY ===
+        // Lưu token vào localStorage với đúng key là 'jwt_token'
         localStorage.setItem('jwt_token', token);
         
-        
+        // Không nên dùng alert(), nó làm gián đoạn luồng ứng dụng
+        // alert('Đăng nhập thành công!'); 
         navigate('/home'); // Chuyển đến trang Home
       } else {
         alert(`Đăng nhập thất bại: ${json.message || 'Email hoặc mật khẩu không đúng.'}`);
