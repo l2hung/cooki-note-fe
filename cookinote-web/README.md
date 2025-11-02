@@ -1,4 +1,4 @@
-# CookiNote Web
+# CookiNote 
 
 Dự án **CookiNote Web** là ứng dụng front-end được xây dựng bằng React và Vite.
 
