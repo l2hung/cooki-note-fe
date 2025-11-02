@@ -23,6 +23,8 @@
     gap: 1rem;
     margin-bottom: 2rem;
     
+    
+    
 }
 
 .user-avatar {
@@ -80,6 +82,32 @@
     transform: scale(1.1);
 }
 
+/* CSS cho icon thông báo */
+.notification-icon {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+/* CSS cho số lượng thông báo */
+.notification-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #ff4757; /* Màu đỏ */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: 1px solid white;
+}
 /* ===============================
    SECTION TITLES
 =============================== */
