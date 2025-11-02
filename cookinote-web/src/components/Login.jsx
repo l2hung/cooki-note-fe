@@ -1,43 +1,70 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; 
 import './Login.css';
-
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); 
+  const location = useLocation(); 
+
+  const from = location.state?.from || '/home'; 
 
   const handleLogin = async (event) => {
     event.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Lỗi: Vui lòng nhập một địa chỉ email hợp lệ.');
+      return;
+    }
+
+
     if (!email || !password) {
       alert('Lỗi: Vui lòng nhập đầy đủ email và mật khẩu.');
       return;
     }
 
     setLoading(true);
+    let loginSuccess = false; 
+
     try {
-      // Đảm bảo request đi qua proxy của Vite
       const response = await fetch('/api/v1/auth/authenticate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
       const json = await response.json();
-
-      // Giả sử backend trả về token trong `json.data.accessToken` hoặc `json.data.token`
-      // Bạn hãy kiểm tra lại cấu trúc response từ API login cho chính xác
-      const token = json.data?.token || json.data?.accessToken;
+      const token = json.data?.token;
 
       if (response.ok && token) {
-        // === SỬA LỖI TẠI ĐÂY ===
-        // Lưu token vào localStorage với đúng key là 'jwt_token'
+        // 1. Lưu token JWT
         localStorage.setItem('jwt_token', token);
-        
-        // Không nên dùng alert(), nó làm gián đoạn luồng ứng dụng
-        // alert('Đăng nhập thành công!'); 
-        navigate('/home'); // Chuyển đến trang Home
+
+        // 2. Giải mã token
+        try {
+            const decodedToken = jwtDecode(token);
+            
+            // 3. Lấy và lưu user_id
+            const currentUserId = decodedToken.userId; 
+
+            if (currentUserId) {
+                localStorage.setItem('user_id', currentUserId);
+                console.log('✅ Đã lưu user_id vào localStorage:', currentUserId);
+                loginSuccess = true; 
+                // 4. Điều hướng
+                navigate(from, { replace: true }); 
+            } else {
+                console.error("Lỗi: Không tìm thấy claim 'userId' trong token.");
+                alert('Đăng nhập thất bại: Token không hợp lệ.');
+            }
+        } catch (decodeError) {
+             console.error("Lỗi giải mã token:", decodeError);
+             alert('Đăng nhập thất bại: Token không hợp lệ.');
+        }
+
       } else {
         alert(`Đăng nhập thất bại: ${json.message || 'Email hoặc mật khẩu không đúng.'}`);
       }
@@ -45,12 +72,14 @@ export default function Login() {
       console.error('Lỗi kết nối:', error);
       alert('Lỗi kết nối: Không thể kết nối đến máy chủ.');
     } finally {
-      setLoading(false);
+      if (!loginSuccess) {
+        setLoading(false);
+      }
     }
   };
 
   return (
-    <div className="form-container">
+     <div className="form-container">
       <form className="auth-form" onSubmit={handleLogin}>
         <img
           src="https://res.cloudinary.com/dqegnnt2w/image/upload/v1755990799/logo.png"
@@ -65,6 +94,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
+          required
         />
         <input
           type="password"
@@ -73,10 +103,17 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
+          required
         />
         <button type="submit" className="submit-button" disabled={loading}>
           {loading ? 'Đang xử lý...' : 'Đăng nhập'}
         </button>
+        
+
+        <p className="forgot-password-link">
+          <Link to="/forgot-password">Quên mật khẩu?</Link>
+        </p>
+
         <p className="switch-form-link">
           Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
         </p>
@@ -84,4 +121,3 @@ export default function Login() {
     </div>
   );
 }
-
