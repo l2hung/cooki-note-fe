@@ -15,6 +15,12 @@ const UserIcon = () => <>&#128100;</>;
 const RecipeIcon = () => <>&#127858;</>;
 const BookIcon = () => <>&#128214;</>;
 
+
+const apiClient = axios.create({
+    baseURL: '/api/v1',
+    headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt_token')}` }
+});
+
 const SearchPage = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
@@ -23,10 +29,6 @@ const SearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const apiClient = axios.create({
-        baseURL: '/api/v1',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt_token')}` }
-    });
 
     useEffect(() => {
         if (!searchTerm.trim()) {
@@ -39,9 +41,9 @@ const SearchPage = () => {
         const delayDebounceFn = setTimeout(() => {
             const endpoint = searchType === 'recipe'
                 ? `/recipes/search?keyword=${searchTerm}`
-                : `/users/search?username=${searchTerm}`;
+                : `/users/search?keyword=${searchTerm}`; 
 
-            apiClient.get(endpoint)
+            apiClient.get(endpoint) 
                 .then(res => setResults(res.data?.data || []))
                 .catch(err => {
                     console.error("Lỗi khi tìm kiếm:", err);
@@ -51,7 +53,8 @@ const SearchPage = () => {
         }, 500);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchTerm, searchType]);
+    
+    }, [searchTerm, searchType]); 
 
     return (
         <div className="search-page-wrapper">
@@ -69,7 +72,6 @@ const SearchPage = () => {
                         autoFocus
                     />
                 </div>
-                {/* Nút FilterIcon đã được xóa khỏi đây */}
             </header>
 
             <div className="search-toggle-container">
@@ -79,7 +81,7 @@ const SearchPage = () => {
                  >
                     <UserIcon />
                     <span>{searchType === 'recipe' ? 'Tìm bạn bếp' : 'Tìm công thức'}</span>
-                </button>
+                 </button>
             </div>
 
             <main className="search-results-container">
@@ -97,12 +99,12 @@ const SearchPage = () => {
                 ))}
             </main>
 
-         
+            
         </div>
     );
 };
 
-// Các component con không thay đổi
+// Component này KHÔNG đổi (Avatar của công thức)
 const RecipeResultCard = ({ recipe }) => (
     <Link to={`/recipe/${recipe.id}`} className="result-card">
         <img src={recipe.medias?.[0]?.media?.url || 'https://via.placeholder.com/60'} alt={recipe.title} />
@@ -113,14 +115,27 @@ const RecipeResultCard = ({ recipe }) => (
     </Link>
 );
 
-const UserResultCard = ({ user }) => (
-    <Link to={`/profile/${user.id}`} className="result-card">
-        <img src={user.medias?.[0]?.media?.url || 'https://via.placeholder.com/60'} alt={user.username} />
-        <div className="result-info">
-            <h4>{user.username}</h4>
-            <p>{user.firstName} {user.lastName}</p>
-        </div>
-    </Link>
-);
+
+const UserResultCard = ({ user }) => {
+   
+    const latestAvatar = user.medias?.slice().reverse().find(m => m.type === 'AVATAR');
+   
+    const avatarUrl = latestAvatar ? `${latestAvatar.media.url}?t=${new Date().getTime()}` : null;
+
+    return (
+        <Link to={`/profile/${user.id}`} className="result-card">
+            <img 
+                src={avatarUrl || 'https://via.placeholder.com/60'} 
+                alt={user.username} 
+                key={avatarUrl} 
+            />
+            <div className="result-info">
+                <h4>{user.username}</h4>
+                <p>{user.firstName} {user.lastName}</p>
+            </div>
+        </Link>
+    );
+};
+
 
 export default SearchPage;
