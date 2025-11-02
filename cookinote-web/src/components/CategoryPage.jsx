@@ -58,7 +58,7 @@ const CategoryPage = () => {
                     <ArrowLeftIcon />
                 </button>
                 <h1>{categoryName || 'Công thức'}</h1>
-                <div className="placeholder"></div> {/* For alignment */}
+                <div className="placeholder"></div> 
             </header>
             
             <main className="category-page-content">
@@ -66,7 +66,7 @@ const CategoryPage = () => {
                 {error && <p className="error-message">{error}</p>}
                 
                 {!loading && !error && (
-                    <div className="recipes-grid-category"> {/* Đổi tên class để tránh xung đột */}
+                    <div className="recipes-grid-category"> 
                         {recipes.length > 0 ? (
                             recipes.map(recipe => (
                                 <Link to={`/recipe/${recipe.id}`} key={recipe.id} className="recipe-card-link">

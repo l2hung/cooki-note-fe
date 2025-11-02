@@ -1,0 +1,165 @@
+/* Trang Chỉnh sửa Hồ sơ (Light Mode) */
+.edit-profile-page {
+    background-color: #ffffff;
+    color: #111;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.edit-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #eee; /* Đường viền mỏng hơn */
+    background-color: #ffffff;
+    position: sticky; /* Ghim header khi cuộn */
+    top: 0;
+    z-index: 100;
+}
+
+.edit-profile-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.edit-profile-header .back-button {
+    background: none;
+    border: none;
+    color: #333; /* Màu icon đen */
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0;
+    z-index: 2; 
+}
+
+.edit-profile-header .update-button {
+    background-color:  #007bff; /* Màu xanh */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.edit-profile-header .update-button:disabled {
+    background-color: #ccc; /* Màu xám nhạt khi bị vô hiệu hóa */
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Vùng Avatar */
+.profile-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+    background-color: #f7f8fa; /* Nền xám nhẹ cho vùng này */
+}
+
+.profile-avatar-edit {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar-letter-edit {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    background-color: #eee; /* Nền avatar chữ */
+    color: #555;
+}
+
+.change-avatar-button {
+    background: none;
+    border: none;
+    color: #007bff; /* Màu xanh */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    /* Dùng cho <label> */
+    display: inline-block; 
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #007bff; /* Thêm viền */
+}
+
+.change-avatar-button[disabled] { /* Dùng [disabled] cho label */
+    color: #aaa;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Vùng Form */
+.form-content {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: #666; /* Màu xám đậm */
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select { /* Áp dụng style cho select */
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ccc; /* Đường gạch ngang */
+    color: #111; /* Chữ đen */
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+/* Điều chỉnh input type="date" và select */
+.form-group input[type="date"],
+.form-group select {
+    padding-right: 0.5rem; 
+    background-color: transparent; 
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-bottom-color: #007bff; 
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+    color: #888;
+    border-bottom-color: #eee;
+    background-color: #f9f9f9;
+}
+
+.error-message {
+    color: #ff4757; 
+    text-align: center;
+    margin-bottom: 1rem;
+}

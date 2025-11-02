@@ -1,0 +1,286 @@
+/* Tổng thể trang (Light Mode) */
+.friends-page {
+    background-color: #f7f8fa; /* Nền xám rất nhạt */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header */
+.friends-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Đẩy 2 nút ra xa */
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky; /* Ghim header khi cuộn */
+    top: 0;
+    z-index: 100;
+}
+.friends-page-header .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.25rem;
+    display: flex;
+    border-radius: 50%;
+}
+.friends-page-header .back-button:hover {
+    background-color: #f0f0f0;
+}
+.friends-page-header h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    /* Tiêu đề tự căn giữa do space-between */
+}
+
+/* --- CSS MỚI: Thanh Tabs --- */
+.friends-tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 61px; /* Chiều cao header của bạn (ước tính) */
+    z-index: 99;
+}
+.tab-button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.tab-button.active {
+    color: #007bff; /* Màu xanh (hoặc màu chính của bạn) */
+    border-bottom-color: #007bff;
+}
+/* --- KẾT THÚC CSS TABS --- */
+
+
+/* Nội dung chính */
+.friends-page main {
+    padding: 0; /* Xóa padding để thẻ bài đăng sát lề */
+    color: #333;
+    text-align: center;
+}
+
+.loading-container {
+    padding-top: 2rem;
+}
+.error-message {
+    padding-top: 2rem;
+    color: #ff4757;
+}
+
+/* Khi feed/list trống */
+.empty-feed {
+    margin-top: 4rem;
+    padding: 0 1.25rem;
+}
+.empty-feed h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.empty-feed p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+.find-friends-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+/* --- CSS CHO TAB 1: FEED (Giữ nguyên) --- */
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Khoảng cách giữa các bài đăng */
+    padding: 0.75rem 0; /* Padding trên/dưới */
+}
+.feed-card {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.feed-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+.feed-author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.feed-author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.feed-author-avatar-letter {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #eee;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.feed-author-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+/* Đã xóa .feed-options-button (vì đã xóa khỏi JSX) */
+.feed-card-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+}
+.feed-card-content {
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+.feed-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.feed-action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+.feed-action-button svg {
+    width: 22px;
+    height: 22px;
+}
+.feed-action-button:disabled {
+    color: #aaa;
+}
+.feed-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+/* --- KẾT THÚC CSS TAB 1 --- */
+
+
+/* --- CSS MỚI CHO TAB 2: DANH SÁCH BẠN --- */
+.friends-list-container {
+    padding-top: 0.5rem;
+    background-color: #fff; /* Nền trắng cho danh sách */
+    text-align: left;
+}
+.friends-list-options {
+    font-size: 0.9rem;
+    color: #666;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user-follow-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+.user-follow-card:hover {
+    background-color: #f9f9f9;
+}
+
+.user-card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.user-card-avatar-letter {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #eee;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.user-card-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.user-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+}
+.user-card-username {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+.user-card-recipes {
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+/* Style cho icon đếm công thức */
+.user-card-recipes svg {
+    width: 14px;
+    height: 14px;
+    fill: #666;
+    stroke: #666;
+}
+
+.follow-status-button {
+    background-color: #e0e0e0; /* Nền xám nhạt */
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s;
+}
+.follow-status-button:hover {
+    background-color: #d5d5d5;
+}

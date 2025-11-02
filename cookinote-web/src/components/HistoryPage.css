@@ -1,0 +1,101 @@
+/* Tổng thể trang */
+.history-page {
+    background-color: #f7f8fa;
+    padding-bottom: 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+  
+}
+
+/* Header */
+.history-page-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+
+
+
+}
+
+.history-page-header .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.history-page-header .back-button:hover {
+    background-color: #f0f0f0;
+}
+
+.history-page-header h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Nội dung chính */
+.history-page main {
+    padding: 1.25rem;
+    color: #555;
+ 
+    text-align: left;
+}
+
+
+
+.history-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.result-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease;
+}
+
+.result-card:hover {
+    background-color: #f9f9f9;
+}
+
+.result-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.result-info {
+    overflow: hidden;
+}
+
+.result-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}

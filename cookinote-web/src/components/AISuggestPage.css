@@ -1,0 +1,145 @@
+/* Tổng thể trang (Light Mode) */
+.ai-suggest-page {
+    background-color: #f7f8fa;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header */
+.ai-suggest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky; 
+    top: 0;
+    z-index: 100;
+}
+.ai-suggest-header .back-button {
+    background: none; border: none; cursor: pointer; color: #333;
+    padding: 0.25rem; display: flex; border-radius: 50%;
+}
+.ai-suggest-header .back-button:hover { background-color: #f0f0f0; }
+.ai-suggest-header h1 { font-size: 1.2rem; font-weight: 600; margin: 0; }
+
+/* Nội dung chính */
+.ai-suggest-page main {
+    padding: 1.25rem;
+}
+
+/* Form nhập prompt */
+.ai-prompt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.ai-prompt-form textarea {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 60px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.ai-prompt-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.ai-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.ai-submit-button:hover {
+    background-color: #0056b3;
+}
+.ai-submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Khu vực kết quả */
+.ai-result-container {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.empty-message {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+}
+.error-message {
+    text-align: center;
+    color: #ff4757;
+}
+
+/* Kết quả trả về (công thức) */
+.ai-recipe-result {
+    text-align: left;
+}
+.ai-recipe-result h2 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-top: 0;
+}
+
+.ai-result-section {
+    margin-bottom: 1.5rem;
+}
+.ai-result-section h3 {
+    font-size: 1.1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.ai-ingredients-list,
+.ai-steps-list {
+    padding-left: 1.5rem;
+    line-height: 1.6;
+}
+
+.ai-steps-list {
+    list-style: decimal; /* Sử dụng số */
+}
+.ai-ingredients-list {
+    list-style: disc; /* Sử dụng chấm tròn */
+}
