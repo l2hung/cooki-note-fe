@@ -1,0 +1,100 @@
+/* Tổng thể trang (Light Mode) */
+.notification-page {
+    background-color: #ffffff; /* Nền trắng */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header */
+.notification-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky; 
+    top: 0;
+    z-index: 100;
+}
+
+.notification-page-header .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.25rem;
+    display: flex;
+    border-radius: 50%;
+}
+
+.notification-page-header .back-button:hover {
+    background-color: #f0f0f0;
+}
+
+.notification-page-header h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Nội dung chính */
+.notification-page main {
+    padding: 0; /* Xóa padding để item sát lề */
+}
+
+.loading-message,
+.empty-message {
+    text-align: center;
+    color: #888;
+    margin-top: 3rem;
+    font-size: 0.95rem;
+}
+
+/* Danh sách thông báo */
+.notification-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+/* Style cho thông báo chưa đọc */
+.notification-item.unread {
+    background-color: #f7f8fa; /* Nền xám nhạt */
+}
+
+.notification-item:hover {
+    background-color: #f9f9f9;
+}
+
+.noti-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.noti-content {
+    flex-grow: 1;
+}
+
+.noti-content p {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.notification-time {
+    font-size: 0.8rem;
+    color: #888;
+}
