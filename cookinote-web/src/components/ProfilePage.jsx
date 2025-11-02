@@ -10,13 +10,14 @@ const ArrowLeftIcon = () => (
         <polyline points="12 19 5 12 12 5"></polyline>
     </svg>
 );
-const EditIcon = () => <>✏️</>;
-const ShareIcon = () => <>🔗</>;
-const UserIcon = () => <>👤</>;
-const CameraIcon = () => <>📷</>;
-const BioIcon = () => <>💬</>;
-const FindFriendsIcon = () => <>👥</>;
-const RecipeIcon = () => <>🍲</>;
+const EditIcon = () => <>&#9999;&#65039;</>;
+const ShareIcon = () => <>&#128279;</>;
+const UserIcon = () => <>&#128100;</>;
+const CameraIcon = () => <>&#128247;</>;
+const BioIcon = () => <>&#128172;</>;
+const FindFriendsIcon = () => <>&#128101;</>;
+const RecipeIcon = () => <>&#127858;</>;
+// --- KẾT THÚC VÙNG SỬA ---
 
 
 const apiClient = axios.create({
@@ -35,29 +36,33 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState('');
 
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [isFollowLoading, setIsFollowLoading] = useState(false);
+
    // Dùng useMemo để isOwnProfile chỉ tính lại khi userId thay đổi
     const isOwnProfile = useMemo(() => {
-        const currentUserId = localStorage.getItem('userToken');
+        const currentUserId = localStorage.getItem('user_id');
         return userId === 'me' || String(userId) === String (currentUserId);
     }, [userId]);
     
     useEffect(() => {
         const token = localStorage.getItem('jwt_token');
         if (!token) {
-            navigate('/login');s
+            navigate('/login');
             return;
         }
 
-        // Cập nhật token mới nhất cho apiClient instance duy nhất
         apiClient.defaults.headers['Authorization'] = `Bearer ${token}`;
-
-        let isMounted = true; // Cờ kiểm tra component còn mount
+        let isMounted = true; 
 
         const fetchUserProfileAndRecipes = async () => {
-            setLoading(true);
-            setError('');
+            if (isMounted) {
+                setLoading(true);
+                setError('');
+            }
 
             try {
+                // Bước 1: Luôn lấy thông tin của hồ sơ đang xem
                 const profileEndpoint = isOwnProfile ? '/users/me' : `/users/${userId}`;
                 const profileRes = await apiClient.get(profileEndpoint);
                 const profileData = profileRes.data?.data;
@@ -66,13 +71,32 @@ const ProfilePage = () => {
 
                 if (profileData) {
                     setUserProfile(profileData);
+
+                    // Bước 2: Lấy công thức của người đó
                     const recipesRes = await apiClient.get(`/recipes/user/${profileData.id}?size=10&sort=createdAt,desc`);
-                    if (!isMounted) return;
-                    setUserRecipes(recipesRes.data?.data || []);
+                    if (isMounted) {
+                        setUserRecipes(recipesRes.data?.data || []);
+                    }
+
+                    // Bước 3: Nếu đây KHÔNG phải hồ sơ của tôi, kiểm tra trạng thái follow
+                    if (!isOwnProfile) {
+                        const currentUserRes = await apiClient.get('/users/me');
+                        const currentUserData = currentUserRes.data?.data;
+                        if (!isMounted) return;
+
+                    
+                        if (currentUserData && currentUserData.followings) { 
+                            const amIFollowing = currentUserData.followings.some(
+                                (followedUser) => followedUser?.following?.id === profileData.id 
+                            );
+                            setIsFollowing(amIFollowing);
+                        }
+                       
+                    }
                 } else {
-                     setError("Không tìm thấy thông tin người dùng.");
-                     setUserProfile(null);
-                     setUserRecipes([]);
+                    setError("Không tìm thấy thông tin người dùng.");
+                    setUserProfile(null);
+                    setUserRecipes([]);
                 }
 
             } catch (err) {
@@ -90,11 +114,13 @@ const ProfilePage = () => {
 
         fetchUserProfileAndRecipes();
 
-        // Cleanup function
+        // Listener để tải lại dữ liệu khi quay lại tab/trang
+        window.addEventListener('focus', fetchUserProfileAndRecipes);
+
         return () => {
             isMounted = false;
+            window.removeEventListener('focus', fetchUserProfileAndRecipes);
         };
-
 
     }, [userId, navigate, isOwnProfile]);
 
@@ -104,33 +130,70 @@ const ProfilePage = () => {
         if (!user) return { completed: 0, total: 3 };
         let completed = 0;
         const hasName = user.firstName || user.lastName;
-        const hasAvatar = user.medias?.some(m => m.type === 'AVATAR' && m.media?.url);
+        const hasAvatar = user.medias?.slice().reverse().find(m => m.type === 'AVATAR')?.media?.url;
         const hasBio = user.biography && user.biography.trim() !== '';
         if (hasName) completed++;
-        if (hasAvatar) completed++;
+        if (hasAvatar) completed++; 
         if (hasBio) completed++;
         return { completed: completed, total: 3 };
     };
 
-    const handleEditProfile = () => navigate('/settings/edit-profile');
+    // Các hàm điều hướng
+    const handleEditProfile = () => navigate('/profile/edit'); 
     const handleShareProfile = () => {
         const profileUrl = window.location.href;
         navigator.clipboard.writeText(profileUrl)
             .then(() => alert('Đã sao chép liên kết hồ sơ!'))
             .catch(() => alert('Không thể sao chép liên kết.'));
     };
-    const handleEditName = () => navigate('/settings/edit-profile');
-    const handleChangeAvatar = () => navigate('/settings/change-avatar');
-    const handleAddBio = () => navigate('/settings/edit-profile');
-    const handleFindFriends = () => navigate('/friends/find');
+    const handleEditName = () => navigate('/profile/edit'); 
+    const handleChangeAvatar = () => navigate('/profile/edit'); 
+    const handleAddBio = () => navigate('/profile/edit'); 
+    const handleFindFriends = () => navigate('/search'); 
+    
+    // Hàm Follow/Unfollow 
+    const handleFollowToggle = async () => {
+        if (isFollowLoading || !userProfile) return; 
+
+        setIsFollowLoading(true);
+        const originalFollowState = isFollowing;
+        const originalFollowerCount = userProfile.followerCount;
+
+        setIsFollowing(!originalFollowState);
+        setUserProfile(prev => ({
+            ...prev,
+            followerCount: originalFollowState ? prev.followerCount - 1 : prev.followerCount + 1
+        }));
+
+        try {
+            const targetId = userProfile.id;
+            if (originalFollowState) {
+                await apiClient.delete(`/follow/${targetId}`);
+            } else {
+                await apiClient.post(`/follow/${targetId}`);
+            }
+        } catch (err) {
+            console.error("Lỗi khi follow/unfollow:", err);
+            setIsFollowing(originalFollowState);
+            setUserProfile(prev => ({
+                ...prev,
+                followerCount: originalFollowerCount
+            }));
+            alert(err.response?.data?.message || "Đã xảy ra lỗi. Vui lòng thử lại.");
+        } finally {
+            setIsFollowLoading(false);
+        }
+    };
 
     // --- Render Logic ---
     const profileCompletion = calculateProfileCompletion(userProfile);
     const displayUser = userProfile || { firstName: "", lastName: "", username: "...", medias: [], followerCount: 0, followingCount: 0 };
     const avatarLetter = displayUser.firstName ? displayUser.firstName.charAt(0).toUpperCase() : (displayUser.username ? displayUser.username.charAt(0).toUpperCase() : '?');
-    const avatarUrl = displayUser.medias?.find(m => m.type === 'AVATAR')?.media?.url;
 
-    // --- Render ---
+    const latestAvatar = displayUser.medias?.slice().reverse().find(m => m.type === 'AVATAR');
+    const avatarUrl = latestAvatar ? `${latestAvatar.media.url}?t=${new Date().getTime()}` : null;
+    
+
     if (loading) return <div className="loading-container">Đang tải hồ sơ...</div>;
     if (error) return <p className="error-message">{error}</p>;
     if (!userProfile) return <p className="error-message">Không tìm thấy thông tin người dùng.</p>;
@@ -139,14 +202,13 @@ const ProfilePage = () => {
         <div className="profile-page-wrapper">
             <header className="profile-page-header">
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate(-2)}
                     className="back-button"
                     aria-label="Quay lại"
                     title="Quay lại"
                 >
                     <ArrowLeftIcon />
                 </button>
-
                 <div className="header-placeholder"></div>
                 <div className="header-placeholder"></div>
             </header>
@@ -155,22 +217,29 @@ const ProfilePage = () => {
                 {/* User Summary Section */}
                 <section className="user-summary">
                      {avatarUrl ? (
-                         <img src={avatarUrl} alt="User Avatar" className="profile-avatar-large" />
+                        <img src={avatarUrl} key={avatarUrl} alt="User Avatar" className="profile-avatar-large" />
                     ) : (
                         <div className="profile-avatar-letter-large">{avatarLetter}</div>
                     )}
                     <h1 className="profile-name">{`${displayUser.firstName || ''} ${displayUser.lastName || ''}`.trim() || displayUser.username}</h1>
                     <p className="profile-username">@{displayUser.username}</p>
-                    <div className="profile-stats">
-                        <span>{displayUser.followerCount || 0} Người quan tâm</span>
+                  <div className="profile-stats">
+                       
+                        <span>{displayUser.followers?.length || 0} Người quan tâm</span>
                         <span>&bull;</span>
-                        <span>{displayUser.followingCount || 0} Bạn bếp</span>
+                        <span>{displayUser.followings?.length || 0} Bạn bếp</span>
                     </div>
                     <div className="profile-actions">
                         {isOwnProfile ? (
                             <button onClick={handleEditProfile} className="action-button edit-button"><EditIcon /> Chỉnh sửa</button>
                         ) : (
-                            <button className="action-button follow-button">Theo dõi</button>
+                            <button 
+                                onClick={handleFollowToggle}
+                                className={`action-button ${isFollowing ? 'unfollow-button' : 'follow-button'}`}
+                                disabled={isFollowLoading}
+                            >
+                                {isFollowLoading ? "Đang xử lý..." : (isFollowing ? "Đang theo dõi" : "Theo dõi")}
+                            </button>
                         )}
                         <button onClick={handleShareProfile} className="action-button share-button"><ShareIcon /> Chia sẻ</button>
                     </div>
