@@ -55,22 +55,33 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: #555;
+    /* Ngăn avatar chữ bị co lại nếu tên quá dài */
+    flex-shrink: 0; 
 }
 
 .user-details {
     display: flex;
     flex-direction: column;
+    /* Cho phép tên co lại nếu cần */
+    overflow: hidden; 
 }
 
 .user-name {
     font-size: 1.1rem;
     font-weight: 600;
+    /* Ngăn tên dài xuống dòng */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-username {
     font-size: 0.9rem;
     color: #777;
     margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-stats {
@@ -78,6 +89,8 @@
     color: #555;
     display: flex;
     gap: 0.75rem;
+    /* Ngăn stats xuống dòng */
+    flex-wrap: nowrap; 
 }
 
 /* Phần menu tùy chọn */
@@ -95,6 +108,7 @@
     color: #333;
     font-size: 1rem;
     transition: background-color 0.2s ease;
+    cursor: pointer; /* Thêm con trỏ cho mục "Đăng xuất" (là div) */
 }
 
 .menu-item svg, .menu-item span { /* Style chung cho icon ký tự */
@@ -107,6 +121,7 @@
     width: 24px; /* Đảm bảo icon thẳng hàng */
     text-align: center;
     color: #555;
+    transition: color 0.2s ease; /* Thêm transition cho màu icon */
 }
 
 
@@ -119,4 +134,20 @@
     border: none;
     border-top: 1px solid #e0e0e0;
     margin: 0.75rem 0;
+}
+
+/* --- PHẦN BỔ SUNG CHO NÚT ĐĂNG XUẤT --- */
+
+.menu-item-logout {
+    color: #d9534f; /* Màu đỏ để cảnh báo */
+}
+
+/* Đảm bảo icon cũng đổi màu */
+.menu-item-logout span:first-child {
+    color: #d9534f;
+}
+
+/* Đổi màu khi hover */
+.menu-item-logout:hover, .menu-item-logout:focus {
+    background-color: #fdf7f7; /* Màu nền đỏ rất nhạt */
 }
