@@ -1,0 +1,188 @@
+/* Tổng thể trang */
+.stats-page {
+    background-color: #f7f8fa;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header */
+.stats-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky; 
+    top: 0;
+    z-index: 100;
+}
+.stats-page-header .back-button {
+    background: none; border: none; cursor: pointer; color: #333;
+    padding: 0.25rem; display: flex; border-radius: 50%;
+}
+.stats-page-header .back-button:hover { background-color: #f0f0f0; }
+.stats-page-header h1 { font-size: 1.2rem; font-weight: 600; margin: 0; }
+
+/* Nội dung chính */
+.stats-page main {
+    padding: 1.25rem;
+}
+
+/* Form lọc ngày */
+.date-filter-form {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    gap: 1rem;
+    align-items: flex-end; /* Căn nút và input thẳng hàng */
+}
+.date-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1; /* Cho 2 input co giãn */
+}
+.date-input-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+}
+.date-input-group input[type="date"] {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.stats-submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    height: fit-content;
+}
+.stats-submit-button:hover {
+    background-color: #0056b3;
+}
+.stats-submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Khu vực kết quả */
+.stats-result-container {
+    text-align: center;
+}
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 3rem auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.error-message {
+    text-align: center;
+    color: #ff4757;
+    margin-top: 1rem;
+}
+
+/* Lưới thống kê */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cột */
+    gap: 1rem;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.stat-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Tùy chỉnh màu */
+.stat-card.blue .stat-icon, .stat-card.blue .stat-value { color: #007bff; }
+.stat-card.red .stat-icon, .stat-card.red .stat-value { color: #ff4757; }
+.stat-card.green .stat-icon, .stat-card.green .stat-value { color: #2ecc71; }
+.stat-card.purple .stat-icon, .stat-card.purple .stat-value { color: #8e44ad; }
+/* Thêm các class này vào cuối file StatsPage.css */
+
+/* --- CSS MỚI: Chi tiết Thống kê --- */
+.stats-details-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+.stats-details-section h2 {
+    font-size: 1.3rem;
+    color: #222;
+    margin-bottom: 1rem;
+}
+
+.stats-recipe-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.recipe-stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.recipe-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.recipe-stat-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+.recipe-stat-numbers {
+    display: flex;
+    gap: 1.25rem; /* Tăng khoảng cách */
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+}
