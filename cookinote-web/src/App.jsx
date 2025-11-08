@@ -20,7 +20,7 @@ import EditProfilePage from './components/EditProfilePage';
 import ShoppingListPage from './components/ShoppingListPage'; 
 import AISuggestPage from './components/AISuggestPage'; 
 import ForgotPasswordPage from './components/ForgotPasswordPage';
-import ResetPasswordPage from './components/ResetPasswordPage';
+
 
 
 import './App.css';
@@ -40,7 +40,6 @@ function App() {
       <Route path="/register" element={<Register />} />
 
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
 
 
       {/* Route cha sử dụng MainLayout */}
